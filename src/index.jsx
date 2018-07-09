@@ -2,11 +2,16 @@ import ReactDOM from "react-dom";
 
 const ReactDataGrid = require('react-data-grid');
 const React = require('react');
-const { Toolbar, Data: { Selectors } } = require('react-data-grid-addons');
+const { Toolbar, Editors, Data: { Selectors } } = require('react-data-grid-addons');
+const { AutoComplete: AutoCompleteEditor, DropDownEditor } = Editors;
 import update from 'immutability-helper';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
+
+
+const priorities = [{ id: 0, title: 'Critical' }, { id: 1, title: 'High' }, { id: 2, title: 'Medium' }, { id: 3, title: 'Low'} ];
+const PrioritiesEditor = <AutoCompleteEditor options={priorities} />;
 
 class Example extends React.Component {
     constructor(props, context) {
@@ -17,49 +22,56 @@ class Example extends React.Component {
                 name: 'ID',
                 width: 80,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                locked: true
             },
             {
                 key: 'task',
                 name: 'Title',
                 editable: true,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                resizable: true
             },
             {
                 key: 'priority',
                 name: 'Priority',
-                editable: true,
+                editor: PrioritiesEditor,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                resizable: true
             },
             {
                 key: 'issueType',
                 name: 'Issue Type',
                 editable: true,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                resizable: true
             },
             {
                 key: 'complete',
                 name: '% Complete',
                 editable: true,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                resizable: true
             },
             {
                 key: 'startDate',
                 name: 'Start Date',
                 editable: true,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                resizable: true
             },
             {
                 key: 'completeDate',
                 name: 'Expected Complete',
                 editable: true,
                 sortable: true,
-                filterable: true
+                filterable: true,
+                resizable: true
             }
         ];
         let originalRows = this.createRows(20);
